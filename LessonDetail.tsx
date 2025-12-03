@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Lesson, Vocabulary, Phrase, DialogueLine } from '../types';
-import { COURSE_CONTENT } from '../constants';
-import { playTextToSpeech, generateExplanation } from '../services/geminiService';
+import { Lesson } from './types';
+import { COURSE_CONTENT } from './constants';
+import { playTextToSpeech, generateExplanation } from './geminiService';
 import { ArrowLeft, Volume2, BookOpen, MessageCircle, Play, Sparkles } from 'lucide-react';
 
 interface LessonDetailProps {

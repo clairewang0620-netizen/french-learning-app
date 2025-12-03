@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Dashboard from './components/Dashboard';
-import LessonDetail from './components/LessonDetail';
-import { Home, User, Settings, Crown } from 'lucide-react';
+import Dashboard from './Dashboard';
+import LessonDetail from './LessonDetail';
+import { Home, User, Settings } from 'lucide-react';
 
 const App: React.FC = () => {
   // Simple hash router state
@@ -43,8 +43,12 @@ const App: React.FC = () => {
 
   const renderContent = () => {
     if (currentRoute.startsWith('/lesson/')) {
-      const lessonId = currentRoute.split('/lesson/')[1];
-      return <LessonDetail lessonId={lessonId} onBack={() => navigateTo('/')} />;
+      // Split by slash and get the ID, ignoring any trailing slashes or queries
+      const parts = currentRoute.split('/lesson/');
+      if (parts.length > 1) {
+          const lessonId = parts[1].split('/')[0];
+          return <LessonDetail lessonId={lessonId} onBack={() => navigateTo('/')} />;
+      }
     }
     
     // Default to Dashboard
@@ -58,7 +62,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col mx-auto max-w-md shadow-2xl overflow-hidden md:max-w-full md:shadow-none font-sans">
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto relative">
+      <main className="flex-1 overflow-y-auto relative scroll-smooth">
         {renderContent()}
       </main>
 
